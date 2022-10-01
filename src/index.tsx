@@ -6,7 +6,9 @@ const LINKING_ERROR =
   '- You rebuilt the app after installing the package\n' +
   '- You are not using Expo managed workflow\n';
 
-const MaterialDatetimePicker = NativeModules.MaterialDatetimePicker  ? NativeModules.MaterialDatetimePicker  : new Proxy(
+const MaterialDatetimePicker = NativeModules.MaterialDatetimePicker
+  ? NativeModules.MaterialDatetimePicker
+  : new Proxy(
       {},
       {
         get() {

@@ -1,4 +1,4 @@
-package com.reactnativematerialdatetimepicker
+package com.thespacemanatee.react_native_material_datetime_picker
 import com.facebook.react.ReactPackage
 import com.facebook.react.bridge.NativeModule
 import com.facebook.react.bridge.ReactApplicationContext

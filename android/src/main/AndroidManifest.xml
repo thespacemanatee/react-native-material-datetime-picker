@@ -1,4 +1,3 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.reactnativematerialdatetimepicker">
-
+          package="com.thespacemanatee.react_native_material_datetime_picker">
 </manifest>

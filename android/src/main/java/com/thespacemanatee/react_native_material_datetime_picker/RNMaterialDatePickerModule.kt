@@ -32,6 +32,7 @@ import com.thespacemanatee.react_native_material_datetime_picker.util.MDPConstan
 import com.thespacemanatee.react_native_material_datetime_picker.util.MDPConstants.KEY_START_MONTH
 import com.thespacemanatee.react_native_material_datetime_picker.util.MDPConstants.KEY_START_YEAR
 import com.thespacemanatee.react_native_material_datetime_picker.util.MDPConstants.KEY_YEAR
+import com.thespacemanatee.react_native_material_datetime_picker.util.fixDate
 import com.thespacemanatee.react_native_material_datetime_picker.util.createCalendarConstraints
 import com.thespacemanatee.react_native_material_datetime_picker.util.createDialogArguments
 import com.thespacemanatee.react_native_material_datetime_picker.util.dismissDialog
@@ -128,11 +129,12 @@ class RNMaterialDatePickerModule(reactContext: ReactApplicationContext) :
   }
 
   private fun createDatePicker(args: MDPArguments?, promise: Promise) = if (args != null) {
-    val date = MDPDate(args)
     val inputMode = if (args.inputMode == INPUT_TEXT) INPUT_MODE_TEXT else INPUT_MODE_CALENDAR
     if (args.type == TYPE_RANGE) {
+      val startDate = MDPDate(args.startDate).fixDate()
+      val endDate = MDPDate(args.endDate).fixDate()
       MaterialDatePicker.Builder.dateRangePicker()
-        .setSelection(Pair(args.startDate, args.endDate))
+        .setSelection(Pair(startDate.timeInMillis, endDate.timeInMillis))
         .setCalendarConstraints(args.createCalendarConstraints())
         .setTitleText(args.title)
         .setInputMode(inputMode)
@@ -142,6 +144,7 @@ class RNMaterialDatePickerModule(reactContext: ReactApplicationContext) :
           addOnDismissListener(OnDismissButtonClickListener(promise))
         }
     } else {
+      val date = MDPDate(args.value).fixDate()
       MaterialDatePicker.Builder.datePicker()
         .setSelection(date.timeInMillis)
         .setCalendarConstraints(args.createCalendarConstraints())

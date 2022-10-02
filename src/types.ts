@@ -56,7 +56,7 @@ export interface TimePickerOptions extends BaseProps {
   maxDate?: never;
   startDate?: never;
   endDate?: never;
-  is24Hours?: boolean;
+  is24Hour?: boolean;
   inputMode?: AndroidTimeInputMode;
   type?: never;
   onDateRangeChange?: never;

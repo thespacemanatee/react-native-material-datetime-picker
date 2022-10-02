@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import type { FunctionComponent } from 'react';
 import { StyleSheet, View, Button, Text } from 'react-native';
 import { subWeeks, addWeeks, format } from 'date-fns';
-import {
+import RNMaterialDatetimePicker, {
   AndroidDateInputMode,
   AndroidPickerMode,
   AndroidTimeInputMode,
-  MaterialDateTimePickerAndroid,
+  MaterialDatetimePickerAndroid,
   AndroidDatePickerType,
 } from 'react-native-material-datetime-picker';
 
@@ -15,26 +15,27 @@ const start = subWeeks(today, 1);
 const end = addWeeks(today, 2);
 
 const App: FunctionComponent = () => {
-  const [time, setTime] = useState(today);
+  const [currentTime, setCurrentTime] = useState(today);
   const [currentDate, setCurrentDate] = useState(today);
   const [currentStartDate, setCurrentStartDate] = useState(start);
   const [currentEndDate, setCurrentEndDate] = useState(end);
+  const [isVisible, setIsVisible] = useState(false);
 
   const handleLaunchTimePicker = () => {
-    MaterialDateTimePickerAndroid.show({
-      value: time,
+    MaterialDatetimePickerAndroid.show({
+      value: currentTime,
       title: 'Select alarm time',
       mode: AndroidPickerMode.TIME,
       is24Hours: true,
       inputMode: AndroidTimeInputMode.CLOCK,
       onChange: (date) => {
-        setTime(date);
+        setCurrentTime(date);
       },
     });
   };
 
   const handleLaunchDatePicker = () => {
-    MaterialDateTimePickerAndroid.show({
+    MaterialDatetimePickerAndroid.show({
       value: currentDate,
       title: 'Select date of birth',
       mode: AndroidPickerMode.DATE,
@@ -49,7 +50,7 @@ const App: FunctionComponent = () => {
   };
 
   const handleLaunchDateRangePicker = () => {
-    MaterialDateTimePickerAndroid.show({
+    MaterialDatetimePickerAndroid.show({
       value: currentDate,
       title: 'Select length of stay',
       mode: AndroidPickerMode.DATE,
@@ -69,7 +70,7 @@ const App: FunctionComponent = () => {
   return (
     <View style={styles.container}>
       <View style={styles.buttonGroup}>
-        <Text style={styles.groupValue}>{format(time, 'pp')}</Text>
+        <Text style={styles.groupValue}>{format(currentTime, 'pp')}</Text>
         <Button title="Launch Time Picker" onPress={handleLaunchTimePicker} />
       </View>
       <View style={styles.buttonGroup}>
@@ -88,6 +89,23 @@ const App: FunctionComponent = () => {
           onPress={handleLaunchDateRangePicker}
         />
       </View>
+      <Button
+        title="Launch Time Picker Declaratively"
+        onPress={() => {
+          setIsVisible(true);
+        }}
+      />
+      {isVisible && (
+        <RNMaterialDatetimePicker
+          value={currentTime}
+          onChange={(time) => {
+            setCurrentTime(time);
+            setIsVisible(false);
+          }}
+          mode={AndroidPickerMode.DATE}
+          // is24Hours={false}
+        />
+      )}
     </View>
   );
 };
@@ -102,8 +120,9 @@ const styles = StyleSheet.create({
   },
   buttonGroup: {
     alignItems: 'center',
+    marginBottom: 16,
   },
   groupValue: {
-    marginVertical: 8,
+    marginBottom: 8,
   },
 });

@@ -116,7 +116,9 @@ class RNMaterialDatePickerModule(reactContext: ReactApplicationContext) :
     val fragmentManager = activity.supportFragmentManager
     val args = options?.createDialogArguments()
     UiThreadUtil.runOnUiThread {
-      createDatePicker(args, promise).show(fragmentManager, TAG)
+      (fragmentManager.findFragmentByTag(TAG) as MaterialDatePicker<*>?) ?: run {
+        createDatePicker(args, promise).show(fragmentManager, TAG)
+      }
     }
   }
 

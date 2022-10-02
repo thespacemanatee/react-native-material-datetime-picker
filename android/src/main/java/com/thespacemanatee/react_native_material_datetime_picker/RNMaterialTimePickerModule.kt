@@ -82,16 +82,8 @@ class RNMaterialTimePickerModule(reactContext: ReactApplicationContext) :
     val fragmentManager = activity.supportFragmentManager
     val args = options?.createDialogArguments()
     UiThreadUtil.runOnUiThread {
-      (fragmentManager.findFragmentByTag(TAG) as MaterialTimePicker?)?.let {
-        val date = MDPDate(args)
-        it.hour = date.hour
-        it.minute = date.minute
-      } ?: run {
-        createTimePicker(args).run {
-          addOnPositiveButtonClickListener(OnPositiveButtonClickListener(this, promise))
-          addOnDismissListener(OnDismissButtonClickListener(promise))
-          show(fragmentManager, TAG)
-        }
+      (fragmentManager.findFragmentByTag(TAG) as MaterialTimePicker?) ?: run {
+        createTimePicker(args, promise).show(fragmentManager, TAG)
       }
     }
   }
@@ -101,7 +93,7 @@ class RNMaterialTimePickerModule(reactContext: ReactApplicationContext) :
     dismissDialog(currentActivity as FragmentActivity, TAG, promise)
   }
 
-  private fun createTimePicker(args: MDPArguments?) = if (args != null) {
+  private fun createTimePicker(args: MDPArguments?, promise: Promise) = if (args != null) {
     val date = MDPDate(args)
     val timeFormat = if (args.is24Hour == true || is24HourFormat(reactApplicationContext)) {
       TimeFormat.CLOCK_24H
@@ -115,7 +107,10 @@ class RNMaterialTimePickerModule(reactContext: ReactApplicationContext) :
       .setMinute(date.minute)
       .setTitleText(args.title)
       .setInputMode(inputMode)
-      .build()
+      .build().apply {
+        addOnPositiveButtonClickListener(OnPositiveButtonClickListener(this, promise))
+        addOnDismissListener(OnDismissButtonClickListener(promise))
+      }
   } else {
     MaterialTimePicker()
   }

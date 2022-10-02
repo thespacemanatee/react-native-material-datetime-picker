@@ -26,7 +26,7 @@ const App: FunctionComponent = () => {
       value: currentTime,
       title: 'Select flight time',
       mode: AndroidPickerMode.TIME,
-      is24Hours: true,
+      is24Hour: true,
       inputMode: AndroidTimeInputMode.CLOCK,
       onChange: (date) => {
         setCurrentTime(date);
@@ -86,7 +86,7 @@ const App: FunctionComponent = () => {
           {`React Native\nMaterial Datetime Picker`}
         </Text>
         <View>
-          <Text style={styles.flight}>SIN ✈ JAP</Text>
+          <Text style={styles.flight}>SIN ✈ JPN</Text>
           <Text style={styles.detail}>
             <Text style={styles.detailLabel}>Booked on: </Text>
             {format(currentDate, 'PP')}

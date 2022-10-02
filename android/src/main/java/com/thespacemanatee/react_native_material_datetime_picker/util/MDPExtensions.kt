@@ -51,21 +51,37 @@ fun ReadableMap.createDialogArguments() = MDPArguments().apply {
 }
 
 fun MDPArguments.createCalendarConstraints(): CalendarConstraints {
-  val date = MDPDate(this)
+  val date = MDPDate(value).fixDate()
   val listValidators = mutableListOf<CalendarConstraints.DateValidator>()
   val builder = CalendarConstraints.Builder().apply {
     setOpenAt(date.timeInMillis)
     minDate?.let {
       date.timeInMillis = it
+      date.fixDate(true)
       listValidators.add(DateValidatorPointForward.from(date.timeInMillis))
     }
     maxDate?.let {
       date.timeInMillis = it
+      date.fixDate()
       listValidators.add(DateValidatorPointBackward.before(date.timeInMillis))
     }
     setValidator(CompositeDateValidator.allOf(listValidators))
   }
   return builder.build()
+}
+
+fun MDPDate.fixDate(start: Boolean = false) = apply {
+  if (start) {
+    hour = 0
+    minute = 0
+    second = 0
+    millisecond = 0
+  } else {
+    hour = 23
+    minute = 59
+    second = 59
+    millisecond = 999
+  }
 }
 
 fun dismissDialog(activity: FragmentActivity?, tag: String, promise: Promise) {

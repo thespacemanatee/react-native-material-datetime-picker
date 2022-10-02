@@ -94,7 +94,7 @@ class RNMaterialTimePickerModule(reactContext: ReactApplicationContext) :
   }
 
   private fun createTimePicker(args: MDPArguments?, promise: Promise) = if (args != null) {
-    val date = MDPDate(args)
+    val date = MDPDate(args.value)
     val timeFormat = if (args.is24Hour == true || is24HourFormat(reactApplicationContext)) {
       TimeFormat.CLOCK_24H
     } else {

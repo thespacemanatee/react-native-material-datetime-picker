@@ -6,8 +6,6 @@
 [![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
-
-
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
@@ -23,8 +21,6 @@
     <a href="https://github.com/thespacemanatee/react-native-material-datetime-picker/issues">Request Feature</a>
   </p>
 </div>
-
-
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -49,15 +45,14 @@
   </ol>
 </details>
 
-
-
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
 [![Product Screen Shot][product-screenshot]](https://example.com)
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+This library is a React Native date & time picker component for Android, using Google's latest Material Design components. It only works on Android, as iOS has its own native date & time picker components. For iOS, you can use the [RNDateTimePicker](https://github.com/react-native-datetimepicker/datetimepicker) or [DatePickerIOS (deprecated)](https://reactnative.dev/docs/datepickerios).
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -77,10 +72,12 @@ yarn add react-native-material-datetime-picker
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+## Expo Support
 
+This library should work with the EAS development client library, but it has not been tested. For managed projects, a config plugin is probably needed. If you would like to contribute a config plugin, please open an issue.
 
 <!-- USAGE EXAMPLES -->
-## Usage
+## Usage (Android)
 
 ### Imperative API
 

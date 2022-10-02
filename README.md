@@ -1,29 +1,253 @@
-# react-native-material-datetime-picker
-React Native date & time picker component for Android, using Google's latest Material Design components
-## Installation
+<a name="readme-top"></a>
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
+
+
+
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+<h3 align="center">React Native Material Datetime Picker</h3>
+
+  <p align="center">
+    React Native date & time picker component for Android, using Google's latest Material Design components
+    <br />
+    <a href="https://github.com/thespacemanatee/react-native-material-datetime-picker"><strong>Explore the docs »</strong></a>
+    <br />
+    <a href="https://github.com/thespacemanatee/react-native-material-datetime-picker/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/thespacemanatee/react-native-material-datetime-picker/issues">Request Feature</a>
+  </p>
+</div>
+
+
+
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
+  </ol>
+</details>
+
+
+
+<!-- ABOUT THE PROJECT -->
+## About The Project
+
+[![Product Screen Shot][product-screenshot]](https://example.com)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+<!-- GETTING STARTED -->
+## Getting Started
+
+### Prerequisites
+
+- Material Design Components for Android
+  - To use this library, you must have Material Components for Android installed. You can find instructions for doing so [here](https://github.com/material-components/material-components-android/blob/master/docs/getting-started.md).
+  - Make sure to apply the `Theme.Material3.DayNight.NoActionBar` theme as well in `styles.xml`
+
+
+### Installation
 
 ```sh
-npm install react-native-material-datetime-picker
+yarn add react-native-material-datetime-picker
 ```
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- USAGE EXAMPLES -->
 ## Usage
 
-```js
-import { multiply } from "react-native-material-datetime-picker";
+### Imperative API
 
-// ...
+```tsx
+import { MaterialDatetimePickerAndroid } from 'react-native-material-datetime-picker';
 
-const result = await multiply(3, 7);
+export const App = () => {
+  const [date, setDate] = useState(new Date());
+  const [time, setTime] = useState(new Date());
+
+  const showTimePicker = () => {
+    MaterialDatetimePickerAndroid.show({
+      value: time,
+      title: 'Select flight time',
+      mode: AndroidPickerMode.TIME,
+      is24Hours: true,
+      inputMode: AndroidTimeInputMode.CLOCK,
+      onChange: (time) => {
+        setTime(time);
+      },
+    });
+  };
+
+  const showTimePicker = () => {
+    MaterialDatetimePickerAndroid.show({
+      value: date,
+      title: 'Select booking date',
+      mode: AndroidPickerMode.DATE,
+      minDate: subWeeks(today, 3),
+      maxDate: addWeeks(today, 4),
+      inputMode: AndroidDateInputMode.CALENDAR,
+      type: AndroidDatePickerType.DEFAULT,
+      onChange: (date) => {
+        setDate(date);
+      },
+    });
+  };
+
+
+  return (
+    <View>
+      <Button onPress={showDatepicker} title="Show date picker" />
+      <Button onPress={showTimepicker} title="Show time picker" />
+      <Text>Date: {date.toLocaleString()}</Text>
+      <Text>Time: {time.toLocaleString()}</Text>
+    </View>
+  );
+};
 ```
 
+### Declarative API
+
+```tsx
+import RNMaterialDatetimePicker from 'react-native-material-datetime-picker';
+
+export const App = () => {
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const [isVisible, setIsVisible] = useState(false)
+
+  return (
+    <View>
+      {isVisible &&
+        <RNMaterialDatetimePicker
+          mode={AndroidPickerMode.DATE}
+          value={currentDate}
+          minDate={subWeeks(today, 3)}
+          maxDate={addWeeks(today, 4)}
+          onChange={(date) => {
+            setCurrentDate(date);
+            setIsVisible(false);
+          }}
+        />
+      }
+    </View>
+  );
+};
+```
+
+### Props
+
+#### Common Options
+
+| Name       | Type                       | Default                  | Required | Description                                                            |
+| ---------- | -------------------------- | ------------------------ | -------- | ---------------------------------------------------------------------- |
+| `mode`     | `AndroidPickerMode`        | `AndroidPickerMode.DATE` | ❌        | The mode of picker to show                                             |
+| `value`    | `Date`                     |                          | ✅        | The current value of the picker                                        |
+| `title`    | `string`                   |                          | ❌        | The title to be shown on the top left                                  |
+| `onChange` | `(date: Date) => string`   |                          | ❌        | The callback invoked when a new date or time is selected               |
+| `onError`  | `(error: unknown) => void` |                          | ❌        | The callback invoked when an error occured while selecting a new value |
+
+#### Date Picker Options
+
+| Name                | Type                                       | Default | Required | Description                                        |
+| ------------------- | ------------------------------------------ | ------- | -------- | -------------------------------------------------- |
+| `minDate`           | `Date`                                     |         | ❌        | The minimum date allowed to be selected            |
+| `maxDate`           | `Date`                                     |         | ❌        | The maximum date allowed to be selected            |
+| `startDate`         | `Date`                                     |         | ❌        | The start date when using a date range picker      |
+| `endDate`           | `Date`                                     |         | ❌        | The end date when using a date range picker        |
+| `inputMode`         | `AndroidDateInputMode`                     |         | ❌        | The input mode to launch the date picker in        |
+| `type`              | `AndroidDatePickerType`                    |         | ❌        | The type of date picker to launch                  |
+| `onDateRangeChange` | `(startDate: Date, endDate: Date) => void` |         | ❌        | The callback invoked when a date range is selected |
+
+#### Time Picker Options
+
+| Name        | Type                   | Default | Required | Description                                  |
+| ----------- | ---------------------- | ------- | -------- | -------------------------------------------- |
+| `is24Hours` | `boolean`              |         | ❌        | The time format to launch the time picker in |
+| `inputMode` | `AndroidTimeInputMode` |         | ❌        | The input mode to launch the time picker in  |
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- ROADMAP -->
+## Roadmap
+
+- [ ] Polyfill for iOS and Web
+- [ ] Theme support
+
+See the [open issues](https://github.com/thespacemanatee/react-native-material-datetime-picker/issues) for a full list of proposed features (and known issues).
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- CONTRIBUTING -->
 ## Contributing
 
-See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+Don't forget to give the project a star! Thanks again!
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- LICENSE -->
 ## License
 
-MIT
+Distributed under the MIT License. See `LICENSE` for more information.
 
----
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-Made with [create-react-native-library](https://github.com/callstack/react-native-builder-bob)
+<!-- ACKNOWLEDGMENTS -->
+## Acknowledgments
+
+* [@react-native-datetimepicker/datetimepicker](https://github.com/react-native-datetimepicker/datetimepicker) - inspiration for the declarative API
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[contributors-shield]: https://img.shields.io/github/contributors/thespacemanatee/react-native-material-datetime-picker.svg?style=for-the-badge
+[contributors-url]: https://github.com/thespacemanatee/react-native-material-datetime-picker/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/thespacemanatee/react-native-material-datetime-picker.svg?style=for-the-badge
+[forks-url]: https://github.com/thespacemanatee/react-native-material-datetime-picker/network/members
+[stars-shield]: https://img.shields.io/github/stars/thespacemanatee/react-native-material-datetime-picker.svg?style=for-the-badge
+[stars-url]: https://github.com/thespacemanatee/react-native-material-datetime-picker/stargazers
+[issues-shield]: https://img.shields.io/github/issues/thespacemanatee/react-native-material-datetime-picker.svg?style=for-the-badge
+[issues-url]: https://github.com/thespacemanatee/react-native-material-datetime-picker/issues
+[license-shield]: https://img.shields.io/github/license/thespacemanatee/react-native-material-datetime-picker.svg?style=for-the-badge
+[license-url]: https://github.com/thespacemanatee/react-native-material-datetime-picker/blob/master/LICENSE
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://linkedin.com/in/chee-kit
+[product-screenshot]: images/product-screenshot.png

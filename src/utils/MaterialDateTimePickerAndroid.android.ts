@@ -5,7 +5,7 @@ import { getPicker } from './android';
 const show = (props: AndroidPickerProps) => {
   const {
     mode = AndroidPickerMode.DATE,
-    value: originalValue,
+    value,
     onChange,
     onDateRangeChange,
     onError,
@@ -30,28 +30,28 @@ const show = (props: AndroidPickerProps) => {
       } = await picker(props);
       switch (action) {
         case ActionType.SET_DATE: {
-          const date = new Date(originalValue);
+          const date = new Date(value);
           date.setFullYear(year, month, day);
           onChange?.(date);
           break;
         }
         case ActionType.SET_DATE_RANGE: {
-          const startDate = new Date(originalValue);
-          const endDate = new Date(originalValue);
+          const startDate = new Date(value);
+          const endDate = new Date(value);
           startDate.setFullYear(startYear, startMonth, startDay);
           endDate.setFullYear(endYear, endMonth, endDay);
           onDateRangeChange?.(startDate, endDate);
           break;
         }
         case ActionType.SET_TIME: {
-          const time = new Date(originalValue);
+          const time = new Date(value);
           time.setHours(hour, minute);
           onChange?.(time);
           break;
         }
         case ActionType.DISMISSED:
         default: {
-          onChange?.(new Date(originalValue));
+          onChange?.(new Date(value));
         }
       }
     } catch (err) {

@@ -34,7 +34,7 @@ type BaseProps = Readonly<
     value: Date;
     title?: string;
     onChange?: (date: Date) => void;
-    onError?: (error: any) => void;
+    onError?: (error: unknown) => void;
   }
 >;
 

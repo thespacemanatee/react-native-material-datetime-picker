@@ -6,6 +6,7 @@ export default class TimePickerAndroid {
   static async show(
     _options: TimePickerOptions
   ): Promise<DateTimePickerResult> {
+    _options;
     throw new Error(`DatePicker is not supported on: ${Platform.OS}`);
   }
 

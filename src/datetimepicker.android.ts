@@ -10,10 +10,11 @@ const RNDateTimePickerAndroid = (props: AndroidPickerProps) => {
     return () => {
       MaterialDateTimePickerAndroid.dismiss(mode);
     };
-  }, []);
+  }, [mode]);
 
   useEffect(() => {
     MaterialDateTimePickerAndroid.show(props);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [onChange, mode]);
 
   return null;

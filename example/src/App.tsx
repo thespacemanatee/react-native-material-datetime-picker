@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import type { FunctionComponent } from 'react';
 import { StyleSheet, View, Button, Text } from 'react-native';
-import { subWeeks, addWeeks } from 'date-fns';
+import { subWeeks, addWeeks, format } from 'date-fns';
 import {
   AndroidDateInputMode,
   AndroidPickerMode,
@@ -69,18 +69,19 @@ const App: FunctionComponent = () => {
   return (
     <View style={styles.container}>
       <View style={styles.buttonGroup}>
-        <Text style={styles.groupValue}>{time.toLocaleTimeString()}</Text>
+        <Text style={styles.groupValue}>{format(time, 'pp')}</Text>
         <Button title="Launch Time Picker" onPress={handleLaunchTimePicker} />
       </View>
       <View style={styles.buttonGroup}>
-        <Text style={styles.groupValue}>
-          {currentDate.toLocaleDateString()}
-        </Text>
+        <Text style={styles.groupValue}>{format(currentDate, 'PPP')}</Text>
         <Button title="Launch Date Picker" onPress={handleLaunchDatePicker} />
       </View>
       <View style={styles.buttonGroup}>
         <Text style={styles.groupValue}>
-          {`${currentStartDate.toLocaleDateString()} to ${currentEndDate.toLocaleDateString()}`}
+          {`${format(currentStartDate, 'PPP')} to ${format(
+            currentEndDate,
+            'PPP'
+          )}`}
         </Text>
         <Button
           title="Launch Date Range Picker"

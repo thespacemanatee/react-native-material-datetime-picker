@@ -18,7 +18,7 @@ const getPicker = (
     case AndroidPickerMode.DATE:
     default: {
       return (props: AndroidPickerProps) =>
-        pickers['date'].show(props as DatePickerOptions);
+        pickers.date.show(props as DatePickerOptions);
     }
   }
 };

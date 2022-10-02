@@ -1,22 +1,37 @@
-import { NativeModules, Platform } from 'react-native';
+import RNMaterialDateTimePicker from './datetimepicker';
+export { MaterialDateTimePickerAndroid } from './utils/MaterialDateTimePickerAndroid';
+export {
+  AndroidPickerMode,
+  AndroidDateInputMode,
+  AndroidTimeInputMode,
+} from './types';
 
-const LINKING_ERROR =
-  `The package 'react-native-material-datetime-picker' doesn't seem to be linked. Make sure: \n\n` +
-  Platform.select({ ios: "- You have run 'pod install'\n", default: '' }) +
-  '- You rebuilt the app after installing the package\n' +
-  '- You are not using Expo managed workflow\n';
+export default RNMaterialDateTimePicker;
+// import { NativeModules, Platform } from 'react-native';
 
-const MaterialDatetimePicker = NativeModules.MaterialDatetimePicker
-  ? NativeModules.MaterialDatetimePicker
-  : new Proxy(
-      {},
-      {
-        get() {
-          throw new Error(LINKING_ERROR);
-        },
-      }
-    );
+// const LINKING_ERROR =
+//   `The package 'react-native-material-datetime-picker' doesn't seem to be linked. Make sure: \n\n` +
+//   Platform.select({ ios: "- You have run 'pod install'\n", default: '' }) +
+//   '- You rebuilt the app after installing the package\n' +
+//   '- You are not using Expo managed workflow\n';
 
-export function multiply(a: number, b: number): Promise<number> {
-  return MaterialDatetimePicker.multiply(a, b);
-}
+// const RNMaterialTimePicker = NativeModules.RNMaterialTimePicker
+//   ? NativeModules.RNMaterialTimePicker
+//   : new Proxy(
+//       {},
+//       {
+//         get() {
+//           throw new Error(LINKING_ERROR);
+//         },
+//       }
+//     );
+
+// export function show(options: {
+//   value: Date;
+//   minDate: Date;
+//   maxDate: Date;
+//   is24Hour: boolean;
+//   inputMode: 'clock' | 'keyboard';
+// }): Promise<void> {
+//   return RNMaterialTimePicker.show(options);
+// }

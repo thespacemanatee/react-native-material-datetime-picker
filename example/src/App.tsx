@@ -1,21 +1,56 @@
-import * as React from 'react';
+import React, { useState } from 'react';
+import type { FunctionComponent } from 'react';
+import { StyleSheet, View, Button, Text } from 'react-native';
+import { subWeeks, addWeeks } from 'date-fns';
+import {
+  AndroidDateInputMode,
+  AndroidPickerMode,
+  AndroidTimeInputMode,
+  MaterialDateTimePickerAndroid,
+} from 'react-native-material-datetime-picker';
 
-import { StyleSheet, View, Text } from 'react-native';
-import { multiply } from 'react-native-material-datetime-picker';
+const App: FunctionComponent = () => {
+  const [time, setTime] = useState(new Date());
 
-export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
+  const handleLaunchTimePicker = () => {
+    MaterialDateTimePickerAndroid.show({
+      value: time,
+      title: 'hell naw',
+      mode: AndroidPickerMode.TIME,
+      is24Hours: true,
+      inputMode: AndroidTimeInputMode.CLOCK,
+      onChange: (date) => {
+        setTime(date);
+      },
+    });
+  };
 
-  React.useEffect(() => {
-    multiply(3, 7).then(setResult);
-  }, []);
+  const handleLaunchDatePicker = () => {
+    const today = new Date();
+    MaterialDateTimePickerAndroid.show({
+      value: today,
+      title: 'hell naw',
+      mode: AndroidPickerMode.DATE,
+      minDate: subWeeks(today, 1),
+      maxDate: addWeeks(today, 2),
+      inputMode: AndroidDateInputMode.CALENDAR,
+    });
+  };
 
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      <View style={styles.button}>
+        <Button title="Launch Time Picker" onPress={handleLaunchTimePicker} />
+        <Text>{time.toISOString()}</Text>
+      </View>
+      <View style={styles.button}>
+        <Button title="Launch Date Picker" onPress={handleLaunchDatePicker} />
+      </View>
     </View>
   );
-}
+};
+
+export default App;
 
 const styles = StyleSheet.create({
   container: {
@@ -23,9 +58,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  box: {
-    width: 60,
-    height: 60,
-    marginVertical: 20,
+  button: {
+    marginVertical: 16,
   },
 });

@@ -130,6 +130,7 @@ repositories {
 dependencies {
   //noinspection GradleDynamicVersion
   implementation "com.facebook.react:react-native:+"
+  implementation 'com.google.android.material:material:1.6.1'
 // From node_modules
 }
 

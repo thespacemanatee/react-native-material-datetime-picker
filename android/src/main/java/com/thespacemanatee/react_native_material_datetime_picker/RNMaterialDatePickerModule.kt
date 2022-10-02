@@ -2,6 +2,7 @@ package com.thespacemanatee.react_native_material_datetime_picker
 
 import android.content.DialogInterface
 import android.content.DialogInterface.OnDismissListener
+import androidx.core.util.Pair
 import androidx.fragment.app.FragmentActivity
 import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
@@ -18,11 +19,18 @@ import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClic
 import com.thespacemanatee.react_native_material_datetime_picker.model.MDPArguments
 import com.thespacemanatee.react_native_material_datetime_picker.model.MDPDate
 import com.thespacemanatee.react_native_material_datetime_picker.util.MDPConstants.ACTION_DISMISSED
-import com.thespacemanatee.react_native_material_datetime_picker.util.MDPConstants.ACTION_SET_TIME
+import com.thespacemanatee.react_native_material_datetime_picker.util.MDPConstants.ACTION_SET_DATE
+import com.thespacemanatee.react_native_material_datetime_picker.util.MDPConstants.ACTION_SET_DATE_RANGE
 import com.thespacemanatee.react_native_material_datetime_picker.util.MDPConstants.ERROR_NO_ACTIVITY
 import com.thespacemanatee.react_native_material_datetime_picker.util.MDPConstants.KEY_ACTION
 import com.thespacemanatee.react_native_material_datetime_picker.util.MDPConstants.KEY_DAY
+import com.thespacemanatee.react_native_material_datetime_picker.util.MDPConstants.KEY_END_DAY
+import com.thespacemanatee.react_native_material_datetime_picker.util.MDPConstants.KEY_END_MONTH
+import com.thespacemanatee.react_native_material_datetime_picker.util.MDPConstants.KEY_END_YEAR
 import com.thespacemanatee.react_native_material_datetime_picker.util.MDPConstants.KEY_MONTH
+import com.thespacemanatee.react_native_material_datetime_picker.util.MDPConstants.KEY_START_DAY
+import com.thespacemanatee.react_native_material_datetime_picker.util.MDPConstants.KEY_START_MONTH
+import com.thespacemanatee.react_native_material_datetime_picker.util.MDPConstants.KEY_START_YEAR
 import com.thespacemanatee.react_native_material_datetime_picker.util.MDPConstants.KEY_YEAR
 import com.thespacemanatee.react_native_material_datetime_picker.util.createCalendarConstraints
 import com.thespacemanatee.react_native_material_datetime_picker.util.createDialogArguments
@@ -33,11 +41,14 @@ class RNMaterialDatePickerModule(reactContext: ReactApplicationContext) :
   companion object {
     @VisibleForTesting
     const val TAG = "RNMaterialDatePicker"
+
+    private const val TYPE_RANGE = "range"
+    private const val INPUT_TEXT = "text"
   }
 
   override fun getName() = TAG
 
-  inner class OnPositiveButtonClickListener(private val promise: Promise) :
+  inner class OnPositiveDateButtonClickListener(private val promise: Promise) :
     MaterialPickerOnPositiveButtonClickListener<Long> {
     private var isPromiseResolved = false
 
@@ -45,13 +56,38 @@ class RNMaterialDatePickerModule(reactContext: ReactApplicationContext) :
       if (!isPromiseResolved && reactApplicationContext.hasActiveReactInstance()) {
         val date = MDPDate().apply { timeInMillis = selection }
         val result = WritableNativeMap().apply {
-          putInt(KEY_ACTION, ACTION_SET_TIME)
+          putInt(KEY_ACTION, ACTION_SET_DATE)
           putInt(KEY_YEAR, date.year)
           putInt(KEY_MONTH, date.month)
           putInt(KEY_DAY, date.day)
         }
         promise.resolve(result)
         isPromiseResolved = true
+      }
+    }
+  }
+
+  inner class OnPositiveDateRangeButtonClickListener(private val promise: Promise) :
+    MaterialPickerOnPositiveButtonClickListener<Pair<Long, Long>> {
+    private var isPromiseResolved = false
+
+    override fun onPositiveButtonClick(selection: Pair<Long, Long>?) {
+      if (!isPromiseResolved && reactApplicationContext.hasActiveReactInstance()) {
+        selection?.let {
+          val date = MDPDate().apply { timeInMillis = it.first }
+          val result = WritableNativeMap().apply {
+            putInt(KEY_ACTION, ACTION_SET_DATE_RANGE)
+            putInt(KEY_START_YEAR, date.year)
+            putInt(KEY_START_MONTH, date.month)
+            putInt(KEY_START_DAY, date.day)
+            date.timeInMillis = it.second
+            putInt(KEY_END_YEAR, date.year)
+            putInt(KEY_END_MONTH, date.month)
+            putInt(KEY_END_DAY, date.day)
+          }
+          promise.resolve(result)
+          isPromiseResolved = true
+        }
       }
     }
   }
@@ -80,11 +116,7 @@ class RNMaterialDatePickerModule(reactContext: ReactApplicationContext) :
     val fragmentManager = activity.supportFragmentManager
     val args = options?.createDialogArguments()
     UiThreadUtil.runOnUiThread {
-      createDatePicker(args).run {
-        addOnPositiveButtonClickListener(OnPositiveButtonClickListener(promise))
-        addOnDismissListener(OnDismissButtonClickListener(promise))
-        show(fragmentManager, TAG)
-      }
+      createDatePicker(args, promise).show(fragmentManager, TAG)
     }
   }
 
@@ -93,15 +125,32 @@ class RNMaterialDatePickerModule(reactContext: ReactApplicationContext) :
     dismissDialog(currentActivity as FragmentActivity, TAG, promise)
   }
 
-  private fun createDatePicker(args: MDPArguments?) = if (args != null) {
+  private fun createDatePicker(args: MDPArguments?, promise: Promise) = if (args != null) {
     val date = MDPDate(args)
-    val inputMode = if (args.inputMode == "text") INPUT_MODE_TEXT else INPUT_MODE_CALENDAR
-    MaterialDatePicker.Builder.datePicker()
-      .setSelection(date.timeInMillis)
-      .setCalendarConstraints(args.createCalendarConstraints())
-      .setTitleText(args.title)
-      .setInputMode(inputMode)
-      .build()
+    val inputMode = if (args.inputMode == INPUT_TEXT) INPUT_MODE_TEXT else INPUT_MODE_CALENDAR
+    if (args.type == TYPE_RANGE) {
+      MaterialDatePicker.Builder.dateRangePicker()
+        .setSelection(Pair(args.startDate, args.endDate))
+        .setCalendarConstraints(args.createCalendarConstraints())
+        .setTitleText(args.title)
+        .setInputMode(inputMode)
+        .build()
+        .apply {
+          addOnPositiveButtonClickListener(OnPositiveDateRangeButtonClickListener(promise))
+          addOnDismissListener(OnDismissButtonClickListener(promise))
+        }
+    } else {
+      MaterialDatePicker.Builder.datePicker()
+        .setSelection(date.timeInMillis)
+        .setCalendarConstraints(args.createCalendarConstraints())
+        .setTitleText(args.title)
+        .setInputMode(inputMode)
+        .build()
+        .apply {
+          addOnPositiveButtonClickListener(OnPositiveDateButtonClickListener(promise))
+          addOnDismissListener(OnDismissButtonClickListener(promise))
+        }
+    }
   } else {
     MaterialDatePicker.Builder.datePicker().build()
   }

@@ -24,6 +24,8 @@ export default class DatePickerAndroid {
       value: options.value.getTime(),
       minDate: options.minDate?.getTime(),
       maxDate: options.maxDate?.getTime(),
+      startDate: options.startDate?.getTime(),
+      endDate: options.endDate?.getTime(),
     });
   }
 

@@ -7,15 +7,23 @@ import {
   AndroidPickerMode,
   AndroidTimeInputMode,
   MaterialDateTimePickerAndroid,
+  AndroidDatePickerType,
 } from 'react-native-material-datetime-picker';
 
+const today = new Date();
+const start = subWeeks(today, 1);
+const end = addWeeks(today, 2);
+
 const App: FunctionComponent = () => {
-  const [time, setTime] = useState(new Date());
+  const [time, setTime] = useState(today);
+  const [currentDate, setCurrentDate] = useState(today);
+  const [currentStartDate, setCurrentStartDate] = useState(start);
+  const [currentEndDate, setCurrentEndDate] = useState(end);
 
   const handleLaunchTimePicker = () => {
     MaterialDateTimePickerAndroid.show({
       value: time,
-      title: 'hell naw',
+      title: 'Select alarm time',
       mode: AndroidPickerMode.TIME,
       is24Hours: true,
       inputMode: AndroidTimeInputMode.CLOCK,
@@ -26,25 +34,58 @@ const App: FunctionComponent = () => {
   };
 
   const handleLaunchDatePicker = () => {
-    const today = new Date();
     MaterialDateTimePickerAndroid.show({
-      value: today,
-      title: 'hell naw',
+      value: currentDate,
+      title: 'Select date of birth',
       mode: AndroidPickerMode.DATE,
-      minDate: subWeeks(today, 1),
-      maxDate: addWeeks(today, 2),
+      minDate: subWeeks(today, 3),
+      maxDate: addWeeks(today, 4),
       inputMode: AndroidDateInputMode.CALENDAR,
+      type: AndroidDatePickerType.DEFAULT,
+      onChange: (date) => {
+        setCurrentDate(date);
+      },
+    });
+  };
+
+  const handleLaunchDateRangePicker = () => {
+    MaterialDateTimePickerAndroid.show({
+      value: currentDate,
+      title: 'Select length of stay',
+      mode: AndroidPickerMode.DATE,
+      minDate: subWeeks(today, 3),
+      maxDate: addWeeks(today, 4),
+      startDate: currentStartDate,
+      endDate: currentEndDate,
+      inputMode: AndroidDateInputMode.CALENDAR,
+      type: AndroidDatePickerType.RANGE,
+      onDateRangeChange: (startDate, endDate) => {
+        setCurrentStartDate(startDate);
+        setCurrentEndDate(endDate);
+      },
     });
   };
 
   return (
     <View style={styles.container}>
-      <View style={styles.button}>
+      <View style={styles.buttonGroup}>
+        <Text style={styles.groupValue}>{time.toLocaleTimeString()}</Text>
         <Button title="Launch Time Picker" onPress={handleLaunchTimePicker} />
-        <Text>{time.toISOString()}</Text>
       </View>
-      <View style={styles.button}>
+      <View style={styles.buttonGroup}>
+        <Text style={styles.groupValue}>
+          {currentDate.toLocaleDateString()}
+        </Text>
         <Button title="Launch Date Picker" onPress={handleLaunchDatePicker} />
+      </View>
+      <View style={styles.buttonGroup}>
+        <Text style={styles.groupValue}>
+          {`${currentStartDate.toLocaleDateString()} to ${currentEndDate.toLocaleDateString()}`}
+        </Text>
+        <Button
+          title="Launch Date Range Picker"
+          onPress={handleLaunchDateRangePicker}
+        />
       </View>
     </View>
   );
@@ -58,7 +99,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  button: {
-    marginVertical: 16,
+  buttonGroup: {
+    alignItems: 'center',
+  },
+  groupValue: {
+    marginVertical: 8,
   },
 });

@@ -10,12 +10,15 @@ import com.google.android.material.datepicker.DateValidatorPointBackward
 import com.google.android.material.datepicker.DateValidatorPointForward
 import com.thespacemanatee.react_native_material_datetime_picker.model.MDPArguments
 import com.thespacemanatee.react_native_material_datetime_picker.model.MDPDate
+import com.thespacemanatee.react_native_material_datetime_picker.util.MDPConstants.KEY_END_DATE
 import com.thespacemanatee.react_native_material_datetime_picker.util.MDPConstants.KEY_INPUT_MODE
 import com.thespacemanatee.react_native_material_datetime_picker.util.MDPConstants.KEY_IS_24_HOUR
 import com.thespacemanatee.react_native_material_datetime_picker.util.MDPConstants.KEY_MAX_DATE
 import com.thespacemanatee.react_native_material_datetime_picker.util.MDPConstants.KEY_MIN_DATE
-import com.thespacemanatee.react_native_material_datetime_picker.util.MDPConstants.KEY_VALUE
+import com.thespacemanatee.react_native_material_datetime_picker.util.MDPConstants.KEY_START_DATE
 import com.thespacemanatee.react_native_material_datetime_picker.util.MDPConstants.KEY_TITLE
+import com.thespacemanatee.react_native_material_datetime_picker.util.MDPConstants.KEY_TYPE
+import com.thespacemanatee.react_native_material_datetime_picker.util.MDPConstants.KEY_VALUE
 
 fun ReadableMap.createDialogArguments() = MDPArguments().apply {
   if (hasKey(KEY_VALUE) && !isNull(KEY_VALUE)) {
@@ -30,11 +33,20 @@ fun ReadableMap.createDialogArguments() = MDPArguments().apply {
   if (hasKey(KEY_MAX_DATE) && !isNull(KEY_MAX_DATE)) {
     maxDate = getDouble(KEY_MAX_DATE).toLong()
   }
+  if (hasKey(KEY_START_DATE) && !isNull(KEY_START_DATE)) {
+    startDate = getDouble(KEY_START_DATE).toLong()
+  }
+  if (hasKey(KEY_END_DATE) && !isNull(KEY_END_DATE)) {
+    endDate = getDouble(KEY_END_DATE).toLong()
+  }
   if (hasKey(KEY_IS_24_HOUR) && !isNull(KEY_IS_24_HOUR)) {
     is24Hour = getBoolean(KEY_IS_24_HOUR)
   }
   if (hasKey(KEY_INPUT_MODE) && !isNull(KEY_INPUT_MODE)) {
     inputMode = getString(KEY_INPUT_MODE)
+  }
+  if (hasKey(KEY_TYPE) && !isNull(KEY_TYPE)) {
+    type = getString(KEY_TYPE)
   }
 }
 

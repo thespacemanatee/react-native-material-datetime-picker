@@ -4,6 +4,7 @@ export {
   AndroidPickerMode,
   AndroidDateInputMode,
   AndroidTimeInputMode,
+  AndroidDatePickerType,
 } from './types';
 
 export default RNMaterialDateTimePicker;

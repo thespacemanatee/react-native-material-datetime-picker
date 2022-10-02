@@ -7,18 +7,40 @@ const show = (props: AndroidPickerProps) => {
     mode = AndroidPickerMode.DATE,
     value: originalValue,
     onChange,
+    onDateRangeChange,
     onError,
   } = props;
   const picker = getPicker(mode);
 
   (async () => {
     try {
-      const { action, day, month, year, minute, hour } = await picker(props);
+      const {
+        action,
+        day,
+        month,
+        year,
+        startDay,
+        startMonth,
+        startYear,
+        endDay,
+        endMonth,
+        endYear,
+        minute,
+        hour,
+      } = await picker(props);
       switch (action) {
         case ActionType.SET_DATE: {
           const date = new Date(originalValue);
           date.setFullYear(year, month, day);
           onChange?.(date);
+          break;
+        }
+        case ActionType.SET_DATE_RANGE: {
+          const startDate = new Date(originalValue);
+          const endDate = new Date(originalValue);
+          startDate.setFullYear(startYear, startMonth, startDay);
+          endDate.setFullYear(endYear, endMonth, endDay);
+          onDateRangeChange?.(startDate, endDate);
           break;
         }
         case ActionType.SET_TIME: {

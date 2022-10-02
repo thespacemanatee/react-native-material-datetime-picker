@@ -17,8 +17,14 @@ export enum AndroidDateInputMode {
   CALENDAR = 'calendar',
 }
 
+export enum AndroidDatePickerType {
+  DEFAULT = 'default',
+  RANGE = 'range',
+}
+
 export enum ActionType {
   SET_DATE,
+  SET_DATE_RANGE,
   SET_TIME,
   DISMISSED,
 }
@@ -36,16 +42,24 @@ export interface DatePickerOptions extends BaseProps {
   mode?: AndroidPickerMode.DATE;
   minDate?: Date;
   maxDate?: Date;
+  startDate?: Date;
+  endDate?: Date;
   is24Hours?: never;
   inputMode?: AndroidDateInputMode;
+  type?: AndroidDatePickerType;
+  onDateRangeChange?: (startDate: Date, endDate: Date) => void;
 }
 
 export interface TimePickerOptions extends BaseProps {
   mode?: AndroidPickerMode.TIME;
   minDate?: never;
   maxDate?: never;
+  startDate?: never;
+  endDate?: never;
   is24Hours?: boolean;
   inputMode?: AndroidTimeInputMode;
+  type?: never;
+  onDateRangeChange?: never;
 }
 
 export type AndroidPickerProps = DatePickerOptions | TimePickerOptions;
@@ -55,6 +69,12 @@ export type DateTimePickerResult = Readonly<{
   year: number;
   month: number;
   day: number;
+  startYear: number;
+  startMonth: number;
+  startDay: number;
+  endYear: number;
+  endMonth: number;
+  endDay: number;
   hour: number;
   minute: number;
 }>;

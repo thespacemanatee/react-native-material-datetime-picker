@@ -33,6 +33,8 @@ class RNMaterialTimePickerModule(reactContext: ReactApplicationContext) :
   companion object {
     @VisibleForTesting
     const val TAG = "RNMaterialTimePicker"
+
+    private const val INPUT_KEYBOARD = "keyboard"
   }
 
   override fun getName() = TAG
@@ -106,7 +108,7 @@ class RNMaterialTimePickerModule(reactContext: ReactApplicationContext) :
     } else {
       TimeFormat.CLOCK_12H
     }
-    val inputMode = if (args.inputMode == "keyboard") INPUT_MODE_KEYBOARD else INPUT_MODE_CLOCK
+    val inputMode = if (args.inputMode == INPUT_KEYBOARD) INPUT_MODE_KEYBOARD else INPUT_MODE_CLOCK
     MaterialTimePicker.Builder()
       .setTimeFormat(timeFormat)
       .setHour(date.hour)

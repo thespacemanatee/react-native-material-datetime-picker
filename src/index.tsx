@@ -1,5 +1,5 @@
-import RNMaterialDateTimePicker from './datetimepicker';
-export { MaterialDateTimePickerAndroid } from './utils/MaterialDateTimePickerAndroid';
+import RNMaterialDatetimePicker from './datetimepicker';
+export { MaterialDatetimePickerAndroid } from './utils/MaterialDatetimePickerAndroid';
 export {
   AndroidPickerMode,
   AndroidDateInputMode,
@@ -7,7 +7,7 @@ export {
   AndroidDatePickerType,
 } from './types';
 
-export default RNMaterialDateTimePicker;
+export default RNMaterialDatetimePicker;
 // import { NativeModules, Platform } from 'react-native';
 
 // const LINKING_ERROR =

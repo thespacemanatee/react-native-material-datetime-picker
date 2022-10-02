@@ -3,10 +3,8 @@ import { Platform } from 'react-native';
 import type { DateTimePickerResult, DatePickerOptions } from './types';
 
 export default class DatePickerAndroid {
-  static async show(
-    _options: DatePickerOptions
-  ): Promise<DateTimePickerResult> {
-    _options;
+  static async show(options: DatePickerOptions): Promise<DateTimePickerResult> {
+    options;
     throw new Error(`DatePicker is not supported on: ${Platform.OS}`);
   }
 

@@ -64,4 +64,4 @@ const dismiss = (mode: AndroidPickerMode): Promise<boolean> => {
   return pickers[mode].dismiss();
 };
 
-export const MaterialDateTimePickerAndroid = { show, dismiss };
+export const MaterialDatetimePickerAndroid = { show, dismiss };

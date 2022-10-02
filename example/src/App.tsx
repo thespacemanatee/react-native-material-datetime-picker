@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import type { FunctionComponent } from 'react';
-import { StyleSheet, View, Button, Text } from 'react-native';
-import { subWeeks, addWeeks, format } from 'date-fns';
+import { StyleSheet, View, Button, Text, SafeAreaView } from 'react-native';
+import { subWeeks, addWeeks, format, subDays } from 'date-fns';
 import RNMaterialDatetimePicker, {
   AndroidDateInputMode,
   AndroidPickerMode,
@@ -21,10 +21,10 @@ const App: FunctionComponent = () => {
   const [currentEndDate, setCurrentEndDate] = useState(end);
   const [isVisible, setIsVisible] = useState(false);
 
-  const handleLaunchTimePicker = () => {
+  const handleShowTimePicker = () => {
     MaterialDatetimePickerAndroid.show({
       value: currentTime,
-      title: 'Select alarm time',
+      title: 'Select flight time',
       mode: AndroidPickerMode.TIME,
       is24Hours: true,
       inputMode: AndroidTimeInputMode.CLOCK,
@@ -34,10 +34,10 @@ const App: FunctionComponent = () => {
     });
   };
 
-  const handleLaunchDatePicker = () => {
+  const handleShowDatePicker = () => {
     MaterialDatetimePickerAndroid.show({
       value: currentDate,
-      title: 'Select date of birth',
+      title: 'Select booking date',
       mode: AndroidPickerMode.DATE,
       minDate: subWeeks(today, 3),
       maxDate: addWeeks(today, 4),
@@ -49,12 +49,12 @@ const App: FunctionComponent = () => {
     });
   };
 
-  const handleLaunchDateRangePicker = () => {
+  const handleShowDateRangePicker = () => {
     MaterialDatetimePickerAndroid.show({
       value: currentDate,
-      title: 'Select length of stay',
+      title: 'Select duration of trip',
       mode: AndroidPickerMode.DATE,
-      minDate: subWeeks(today, 3),
+      minDate: subDays(currentDate, 1),
       maxDate: addWeeks(today, 4),
       startDate: currentStartDate,
       endDate: currentEndDate,
@@ -68,45 +68,62 @@ const App: FunctionComponent = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.buttonGroup}>
-        <Text style={styles.groupValue}>{format(currentTime, 'pp')}</Text>
-        <Button title="Launch Time Picker" onPress={handleLaunchTimePicker} />
-      </View>
-      <View style={styles.buttonGroup}>
-        <Text style={styles.groupValue}>{format(currentDate, 'PPP')}</Text>
-        <Button title="Launch Date Picker" onPress={handleLaunchDatePicker} />
-      </View>
-      <View style={styles.buttonGroup}>
-        <Text style={styles.groupValue}>
-          {`${format(currentStartDate, 'PPP')} to ${format(
-            currentEndDate,
-            'PPP'
-          )}`}
-        </Text>
-        <Button
-          title="Launch Date Range Picker"
-          onPress={handleLaunchDateRangePicker}
-        />
-      </View>
-      <Button
-        title="Launch Time Picker Declaratively"
-        onPress={() => {
-          setIsVisible(true);
-        }}
-      />
+    <>
       {isVisible && (
         <RNMaterialDatetimePicker
-          value={currentTime}
-          onChange={(time) => {
-            setCurrentTime(time);
+          mode={AndroidPickerMode.DATE}
+          value={currentDate}
+          minDate={subWeeks(today, 3)}
+          maxDate={addWeeks(today, 4)}
+          onChange={(date) => {
+            setCurrentDate(date);
             setIsVisible(false);
           }}
-          mode={AndroidPickerMode.DATE}
-          // is24Hours={false}
         />
       )}
-    </View>
+      <SafeAreaView style={styles.container}>
+        <Text style={styles.title}>
+          {`React Native\nMaterial Datetime Picker`}
+        </Text>
+        <View>
+          <Text style={styles.flight}>SIN ✈ JAP</Text>
+          <Text style={styles.detail}>
+            <Text style={styles.detailLabel}>Booked on: </Text>
+            {format(currentDate, 'PP')}
+          </Text>
+          <Text style={styles.detail}>
+            <Text style={styles.detailLabel}>Flight time: </Text>
+            {format(currentTime, 'p')}
+          </Text>
+          <Text style={styles.detail}>
+            <Text style={styles.detailLabel}>Duration: </Text>
+            {format(currentStartDate, 'PP')} ✈ {format(currentEndDate, 'PP')}
+          </Text>
+        </View>
+        <View style={styles.buttonContainer}>
+          <View style={styles.button}>
+            <Button title="Show Time Picker" onPress={handleShowTimePicker} />
+          </View>
+          <View style={styles.button}>
+            <Button title="Show Date Picker" onPress={handleShowDatePicker} />
+          </View>
+          <View style={styles.button}>
+            <Button
+              title="Show Date Range Picker"
+              onPress={handleShowDateRangePicker}
+            />
+          </View>
+          <View style={styles.button}>
+            <Button
+              title="Show Time Picker Declaratively"
+              onPress={() => {
+                setIsVisible(true);
+              }}
+            />
+          </View>
+        </View>
+      </SafeAreaView>
+    </>
   );
 };
 
@@ -116,13 +133,35 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
   },
-  buttonGroup: {
-    alignItems: 'center',
+  title: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    margin: 16,
+  },
+  flight: {
+    fontSize: 42,
+    fontWeight: 'bold',
+    color: 'green',
+    textAlign: 'center',
     marginBottom: 16,
   },
-  groupValue: {
+  detail: {
+    fontSize: 20,
     marginBottom: 8,
+  },
+  detailLabel: {
+    fontWeight: 'bold',
+  },
+  buttonContainer: {
+    width: '100%',
+    marginVertical: 16,
+  },
+  button: {
+    width: '100%',
+    paddingHorizontal: 16,
+    paddingVertical: 8,
   },
 });

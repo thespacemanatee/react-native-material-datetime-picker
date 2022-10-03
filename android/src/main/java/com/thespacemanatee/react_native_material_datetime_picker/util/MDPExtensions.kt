@@ -11,6 +11,7 @@ import com.google.android.material.datepicker.DateValidatorPointForward
 import com.thespacemanatee.react_native_material_datetime_picker.model.MDPArguments
 import com.thespacemanatee.react_native_material_datetime_picker.model.MDPDate
 import com.thespacemanatee.react_native_material_datetime_picker.util.MDPConstants.KEY_END_DATE
+import com.thespacemanatee.react_native_material_datetime_picker.util.MDPConstants.KEY_FULLSCREEN
 import com.thespacemanatee.react_native_material_datetime_picker.util.MDPConstants.KEY_INPUT_MODE
 import com.thespacemanatee.react_native_material_datetime_picker.util.MDPConstants.KEY_IS_24_HOUR
 import com.thespacemanatee.react_native_material_datetime_picker.util.MDPConstants.KEY_MAX_DATE
@@ -52,6 +53,9 @@ fun ReadableMap.createDialogArguments() = MDPArguments().apply {
   }
   if (hasKey(KEY_INPUT_MODE) && !isNull(KEY_INPUT_MODE)) {
     inputMode = getString(KEY_INPUT_MODE)
+  }
+  if (hasKey(KEY_FULLSCREEN) && !isNull(KEY_FULLSCREEN)) {
+    fullscreen = getBoolean(KEY_FULLSCREEN)
   }
   if (hasKey(KEY_TYPE) && !isNull(KEY_TYPE)) {
     type = getString(KEY_TYPE)

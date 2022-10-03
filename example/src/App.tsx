@@ -22,6 +22,7 @@ const App: FunctionComponent = () => {
   const [currentEndDate, setCurrentEndDate] = useState(end);
   const [isVisible, setIsVisible] = useState(false);
   const [is24Hour, setIs24Hour] = useState(false);
+  const [fullscreen, setFullscreen] = useState(false);
 
   const handleShowTimePicker = () => {
     MaterialDatetimePickerAndroid.show({
@@ -48,6 +49,7 @@ const App: FunctionComponent = () => {
       positiveButtonText: 'Sounds good!',
       negativeButtonText: 'Nah',
       inputMode: AndroidDateInputMode.CALENDAR,
+      fullscreen,
       type: AndroidDatePickerType.DEFAULT,
       onConfirm: (date) => {
         setCurrentDate(date);
@@ -79,10 +81,9 @@ const App: FunctionComponent = () => {
     <>
       {isVisible && (
         <RNMaterialDatetimePicker
-          mode={AndroidPickerMode.DATE}
+          mode={AndroidPickerMode.TIME}
           value={currentDate}
-          minimumDate={subWeeks(today, 3)}
-          maximumDate={addWeeks(today, 4)}
+          is24Hour={is24Hour}
           positiveButtonText="Sounds good!"
           negativeButtonText="Nah"
           onConfirm={(date) => {
@@ -128,6 +129,15 @@ const App: FunctionComponent = () => {
           <View style={styles.buttonGroup}>
             <View style={styles.button}>
               <Button title="Show Date Picker" onPress={handleShowDatePicker} />
+            </View>
+            <View style={styles.checkboxGroup}>
+              <Text>Fullscreen</Text>
+              <CheckBox
+                value={fullscreen}
+                onValueChange={(value) => {
+                  setFullscreen(value);
+                }}
+              />
             </View>
           </View>
           <View style={styles.buttonGroup}>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import type { FunctionComponent } from 'react';
 import { StyleSheet, View, Button, Text, SafeAreaView } from 'react-native';
+import CheckBox from '@react-native-community/checkbox';
 import { subWeeks, addWeeks, format, subDays } from 'date-fns';
 import RNMaterialDatetimePicker, {
   AndroidDateInputMode,
@@ -20,15 +21,16 @@ const App: FunctionComponent = () => {
   const [currentStartDate, setCurrentStartDate] = useState(start);
   const [currentEndDate, setCurrentEndDate] = useState(end);
   const [isVisible, setIsVisible] = useState(false);
+  const [is24Hour, setIs24Hour] = useState(false);
 
   const handleShowTimePicker = () => {
     MaterialDatetimePickerAndroid.show({
       value: currentTime,
       titleText: 'Select flight time',
       mode: AndroidPickerMode.TIME,
-      is24Hour: true,
+      is24Hour,
       positiveButtonText: 'Sounds good!',
-      negativeButtonText: 'Maybe not',
+      negativeButtonText: 'Nah',
       inputMode: AndroidTimeInputMode.CLOCK,
       onConfirm: (date) => {
         setCurrentTime(date);
@@ -44,7 +46,7 @@ const App: FunctionComponent = () => {
       minimumDate: subWeeks(today, 3),
       maximumDate: addWeeks(today, 4),
       positiveButtonText: 'Sounds good!',
-      negativeButtonText: 'Maybe not',
+      negativeButtonText: 'Nah',
       inputMode: AndroidDateInputMode.CALENDAR,
       type: AndroidDatePickerType.DEFAULT,
       onConfirm: (date) => {
@@ -63,7 +65,7 @@ const App: FunctionComponent = () => {
       startDate: currentStartDate,
       endDate: currentEndDate,
       positiveButtonText: 'Sounds good!',
-      negativeButtonText: 'Maybe not',
+      negativeButtonText: 'Nah',
       inputMode: AndroidDateInputMode.CALENDAR,
       type: AndroidDatePickerType.RANGE,
       onConfirmDateRange: (startDate, endDate) => {
@@ -82,7 +84,7 @@ const App: FunctionComponent = () => {
           minimumDate={subWeeks(today, 3)}
           maximumDate={addWeeks(today, 4)}
           positiveButtonText="Sounds good!"
-          negativeButtonText="Maybe not"
+          negativeButtonText="Nah"
           onConfirm={(date) => {
             setCurrentDate(date);
             setIsVisible(false);
@@ -109,25 +111,42 @@ const App: FunctionComponent = () => {
           </Text>
         </View>
         <View style={styles.buttonContainer}>
-          <View style={styles.button}>
-            <Button title="Show Time Picker" onPress={handleShowTimePicker} />
+          <View style={styles.buttonGroup}>
+            <View style={styles.button}>
+              <Button title="Show Time Picker" onPress={handleShowTimePicker} />
+            </View>
+            <View style={styles.checkboxGroup}>
+              <Text>24 Hour</Text>
+              <CheckBox
+                value={is24Hour}
+                onValueChange={(value) => {
+                  setIs24Hour(value);
+                }}
+              />
+            </View>
           </View>
-          <View style={styles.button}>
-            <Button title="Show Date Picker" onPress={handleShowDatePicker} />
+          <View style={styles.buttonGroup}>
+            <View style={styles.button}>
+              <Button title="Show Date Picker" onPress={handleShowDatePicker} />
+            </View>
           </View>
-          <View style={styles.button}>
-            <Button
-              title="Show Date Range Picker"
-              onPress={handleShowDateRangePicker}
-            />
+          <View style={styles.buttonGroup}>
+            <View style={styles.button}>
+              <Button
+                title="Show Date Range Picker"
+                onPress={handleShowDateRangePicker}
+              />
+            </View>
           </View>
-          <View style={styles.button}>
-            <Button
-              title="Show Time Picker Declaratively"
-              onPress={() => {
-                setIsVisible(true);
-              }}
-            />
+          <View style={styles.buttonGroup}>
+            <View style={styles.button}>
+              <Button
+                title="Show Time Picker Declaratively"
+                onPress={() => {
+                  setIsVisible(true);
+                }}
+              />
+            </View>
           </View>
         </View>
       </SafeAreaView>
@@ -167,9 +186,18 @@ const styles = StyleSheet.create({
     width: '100%',
     marginVertical: 16,
   },
-  button: {
+  buttonGroup: {
+    flexDirection: 'row',
     width: '100%',
     paddingHorizontal: 16,
+  },
+  button: {
+    flex: 1,
     paddingVertical: 8,
+  },
+  checkboxGroup: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginLeft: 16,
   },
 });

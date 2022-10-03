@@ -106,6 +106,8 @@ class RNMaterialTimePickerModule(reactContext: ReactApplicationContext) :
       .setHour(date.hour)
       .setMinute(date.minute)
       .setTitleText(args.title)
+      .setPositiveButtonText(args.positiveButtonText)
+      .setNegativeButtonText(args.negativeButtonText)
       .setInputMode(inputMode)
       .build().apply {
         addOnPositiveButtonClickListener(OnPositiveButtonClickListener(this, promise))

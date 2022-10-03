@@ -1,10 +1,10 @@
-import DatePickerAndroid from './datepicker';
-import TimePickerAndroid from './timepicker';
+import DatePicker from './datepicker';
+import TimePicker from './timepicker';
 import { AndroidPickerMode } from './types';
 
 const pickers = {
-  [AndroidPickerMode.DATE]: DatePickerAndroid,
-  [AndroidPickerMode.TIME]: TimePickerAndroid,
+  [AndroidPickerMode.DATE]: DatePicker,
+  [AndroidPickerMode.TIME]: TimePicker,
 };
 
 export default pickers;

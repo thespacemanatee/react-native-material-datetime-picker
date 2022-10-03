@@ -14,7 +14,7 @@ const RNMaterialDatePicker = NativeModules.RNMaterialTimePicker
       }
     );
 
-export default class DatePickerAndroid {
+export default class DatePicker {
   /**
    * Shows the Android Material Design time picker dialog.
    */
@@ -22,8 +22,8 @@ export default class DatePickerAndroid {
     return RNMaterialDatePicker.show({
       ...options,
       value: options.value.getTime(),
-      minDate: options.minDate?.getTime(),
-      maxDate: options.maxDate?.getTime(),
+      minimumDate: options.minimumDate?.getTime(),
+      maximumDate: options.maximumDate?.getTime(),
       startDate: options.startDate?.getTime(),
       endDate: options.endDate?.getTime(),
     });

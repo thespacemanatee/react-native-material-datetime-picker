@@ -15,8 +15,10 @@ import com.thespacemanatee.react_native_material_datetime_picker.util.MDPConstan
 import com.thespacemanatee.react_native_material_datetime_picker.util.MDPConstants.KEY_IS_24_HOUR
 import com.thespacemanatee.react_native_material_datetime_picker.util.MDPConstants.KEY_MAX_DATE
 import com.thespacemanatee.react_native_material_datetime_picker.util.MDPConstants.KEY_MIN_DATE
+import com.thespacemanatee.react_native_material_datetime_picker.util.MDPConstants.KEY_NEG_BUTTON_TEXT
+import com.thespacemanatee.react_native_material_datetime_picker.util.MDPConstants.KEY_POS_BUTTON_TEXT
 import com.thespacemanatee.react_native_material_datetime_picker.util.MDPConstants.KEY_START_DATE
-import com.thespacemanatee.react_native_material_datetime_picker.util.MDPConstants.KEY_TITLE
+import com.thespacemanatee.react_native_material_datetime_picker.util.MDPConstants.KEY_TITLE_TEXT
 import com.thespacemanatee.react_native_material_datetime_picker.util.MDPConstants.KEY_TYPE
 import com.thespacemanatee.react_native_material_datetime_picker.util.MDPConstants.KEY_VALUE
 
@@ -24,8 +26,8 @@ fun ReadableMap.createDialogArguments() = MDPArguments().apply {
   if (hasKey(KEY_VALUE) && !isNull(KEY_VALUE)) {
     value = getDouble(KEY_VALUE).toLong()
   }
-  if (hasKey(KEY_TITLE) && !isNull(KEY_TITLE)) {
-    title = getString(KEY_TITLE)
+  if (hasKey(KEY_TITLE_TEXT) && !isNull(KEY_TITLE_TEXT)) {
+    title = getString(KEY_TITLE_TEXT)
   }
   if (hasKey(KEY_MIN_DATE) && !isNull(KEY_MIN_DATE)) {
     minDate = getDouble(KEY_MIN_DATE).toLong()
@@ -41,6 +43,12 @@ fun ReadableMap.createDialogArguments() = MDPArguments().apply {
   }
   if (hasKey(KEY_IS_24_HOUR) && !isNull(KEY_IS_24_HOUR)) {
     is24Hour = getBoolean(KEY_IS_24_HOUR)
+  }
+  if (hasKey(KEY_POS_BUTTON_TEXT) && !isNull(KEY_POS_BUTTON_TEXT)) {
+    positiveButtonText = getString(KEY_POS_BUTTON_TEXT)
+  }
+  if (hasKey(KEY_NEG_BUTTON_TEXT) && !isNull(KEY_NEG_BUTTON_TEXT)) {
+    negativeButtonText = getString(KEY_NEG_BUTTON_TEXT)
   }
   if (hasKey(KEY_INPUT_MODE) && !isNull(KEY_INPUT_MODE)) {
     inputMode = getString(KEY_INPUT_MODE)

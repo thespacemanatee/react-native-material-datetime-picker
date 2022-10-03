@@ -14,7 +14,7 @@ const RNMaterialTimePicker = NativeModules.RNMaterialTimePicker
       }
     );
 
-export default class TimePickerAndroid {
+export default class TimePicker {
   /**
    * Shows the Android Material Design time picker dialog.
    */

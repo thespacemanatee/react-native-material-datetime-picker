@@ -32,10 +32,10 @@ import com.thespacemanatee.react_native_material_datetime_picker.util.MDPConstan
 import com.thespacemanatee.react_native_material_datetime_picker.util.MDPConstants.KEY_START_MONTH
 import com.thespacemanatee.react_native_material_datetime_picker.util.MDPConstants.KEY_START_YEAR
 import com.thespacemanatee.react_native_material_datetime_picker.util.MDPConstants.KEY_YEAR
-import com.thespacemanatee.react_native_material_datetime_picker.util.fixDate
 import com.thespacemanatee.react_native_material_datetime_picker.util.createCalendarConstraints
 import com.thespacemanatee.react_native_material_datetime_picker.util.createDialogArguments
 import com.thespacemanatee.react_native_material_datetime_picker.util.dismissDialog
+import com.thespacemanatee.react_native_material_datetime_picker.util.fixDate
 
 class RNMaterialDatePickerModule(reactContext: ReactApplicationContext) :
   ReactContextBaseJavaModule(reactContext), BaseRNMaterialPicker {
@@ -137,6 +137,8 @@ class RNMaterialDatePickerModule(reactContext: ReactApplicationContext) :
         .setSelection(Pair(startDate.timeInMillis, endDate.timeInMillis))
         .setCalendarConstraints(args.createCalendarConstraints())
         .setTitleText(args.title)
+        .setPositiveButtonText(args.positiveButtonText)
+        .setNegativeButtonText(args.negativeButtonText)
         .setInputMode(inputMode)
         .build()
         .apply {
@@ -149,6 +151,8 @@ class RNMaterialDatePickerModule(reactContext: ReactApplicationContext) :
         .setSelection(date.timeInMillis)
         .setCalendarConstraints(args.createCalendarConstraints())
         .setTitleText(args.title)
+        .setPositiveButtonText(args.positiveButtonText)
+        .setNegativeButtonText(args.negativeButtonText)
         .setInputMode(inputMode)
         .build()
         .apply {

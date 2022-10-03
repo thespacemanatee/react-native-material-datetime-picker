@@ -5,12 +5,14 @@ object MDPConstants {
 
   // arguments
   const val KEY_VALUE = "value"
-  const val KEY_TITLE = "title"
-  const val KEY_MIN_DATE = "minDate"
-  const val KEY_MAX_DATE = "maxDate"
+  const val KEY_TITLE_TEXT = "titleText"
+  const val KEY_MIN_DATE = "minimumDate"
+  const val KEY_MAX_DATE = "maximumDate"
   const val KEY_START_DATE = "startDate"
   const val KEY_END_DATE = "endDate"
   const val KEY_IS_24_HOUR = "is24Hour"
+  const val KEY_POS_BUTTON_TEXT = "positiveButtonText"
+  const val KEY_NEG_BUTTON_TEXT = "negativeButtonText"
   const val KEY_INPUT_MODE = "inputMode"
   const val KEY_TYPE = "type"
 

@@ -60,7 +60,7 @@ type BaseProps = Readonly<
 
 export interface DatePickerOptions extends BaseProps {
   /**
-   * The mode of picker to show
+   * The mode of picker to show. Can be either `AndroidPickerMode.DATE` or `AndroidPickerMode.TIME`.
    */
   mode?: AndroidPickerMode.DATE;
   /**
@@ -85,7 +85,12 @@ export interface DatePickerOptions extends BaseProps {
    */
   inputMode?: AndroidDateInputMode;
   /**
-   * The type of date picker to launch
+   * Whether to show the date picker in fullscreen mode
+   */
+  fullscreen?: boolean;
+  /**
+   * The type of date picker to launch. Can be either `AndroidDatePickerType.DEFAULT`
+   * for the regular date picker or `AndroidDatePickerType.RANGE` for the date range picker
    */
   type?: AndroidDatePickerType;
   /**
@@ -96,7 +101,7 @@ export interface DatePickerOptions extends BaseProps {
 
 export interface TimePickerOptions extends BaseProps {
   /**
-   * The mode of picker to show
+   * The mode of picker to show. Can be either `AndroidPickerMode.DATE` or `AndroidPickerMode.TIME`.
    */
   mode?: AndroidPickerMode.TIME;
   minimumDate?: never;

@@ -148,6 +148,7 @@ class RNMaterialDatePickerModule(reactContext: ReactApplicationContext) :
         }
     } else {
       val date = MDPDate(args.value).fixDate()
+      val theme = if (args.fullscreen == true) R.style.ThemeOverlay_Material3_MaterialCalendar_Fullscreen else R.style.ThemeOverlay_Material3_MaterialCalendar
       MaterialDatePicker.Builder.datePicker()
         .setSelection(date.timeInMillis)
         .setCalendarConstraints(args.createCalendarConstraints())
@@ -155,6 +156,7 @@ class RNMaterialDatePickerModule(reactContext: ReactApplicationContext) :
         .setPositiveButtonText(args.positiveButtonText)
         .setNegativeButtonText(args.negativeButtonText)
         .setInputMode(inputMode)
+        .setTheme(theme)
         .build()
         .apply {
           addOnPositiveButtonClickListener(OnPositiveDateButtonClickListener(promise))

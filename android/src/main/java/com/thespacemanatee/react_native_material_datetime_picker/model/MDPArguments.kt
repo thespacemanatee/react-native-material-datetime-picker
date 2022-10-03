@@ -12,5 +12,6 @@ data class MDPArguments(
   var positiveButtonText: String? = null,
   var negativeButtonText: String? = null,
   var inputMode: String? = null,
+  var fullscreen: Boolean? = null,
   var type: String? = null
 )

@@ -186,27 +186,28 @@ export const App = () => {
 
 #### Common Options
 
-| Name                 | Type                       | Default                  | Required | Description                                                            |
-| -------------------- | -------------------------- | ------------------------ | -------- | ---------------------------------------------------------------------- |
-| `mode`               | `AndroidPickerMode`        | `AndroidPickerMode.DATE` | ❌        | The mode of picker to show                                             |
-| `value`              | `Date`                     |                          | ✅        | The current value of the picker                                        |
-| `titleText`          | `string`                   |                          | ❌        | The title to be shown on the top left                                  |
-| `positiveButtonText` | `string`                   |                          | ❌        | The text used in the positive action button                            |
-| `negativeButtonText` | `string`                   |                          | ❌        | The text used in the negative action button                            |
-| `onChange`           | `(date: Date) => string`   |                          | ❌        | The callback invoked when a new date or time is selected               |
-| `onError`            | `(error: unknown) => void` |                          | ❌        | The callback invoked when an error occured while selecting a new value |
+| Name                 | Type                       | Default                  | Required | Description                                                                                     |
+| -------------------- | -------------------------- | ------------------------ | -------- | ----------------------------------------------------------------------------------------------- |
+| `mode`               | `AndroidPickerMode`        | `AndroidPickerMode.DATE` | ❌        | The mode of picker to show. Can be either `AndroidPickerMode.DATE` or `AndroidPickerMode.TIME`. |
+| `value`              | `Date`                     |                          | ✅        | The current value of the picker                                                                 |
+| `titleText`          | `string`                   |                          | ❌        | The title to be shown on the top left                                                           |
+| `positiveButtonText` | `string`                   |                          | ❌        | The text used in the positive action button                                                     |
+| `negativeButtonText` | `string`                   |                          | ❌        | The text used in the negative action button                                                     |
+| `onChange`           | `(date: Date) => string`   |                          | ❌        | The callback invoked when a new date or time is selected                                        |
+| `onError`            | `(error: unknown) => void` |                          | ❌        | The callback invoked when an error occured while selecting a new value                          |
 
 #### Date Picker Options
 
-| Name                | Type                                       | Default | Required | Description                                        |
-| ------------------- | ------------------------------------------ | ------- | -------- | -------------------------------------------------- |
-| `minimumDate`       | `Date`                                     |         | ❌        | The minimum date allowed to be selected            |
-| `maximumDate`       | `Date`                                     |         | ❌        | The maximum date allowed to be selected            |
-| `startDate`         | `Date`                                     |         | ❌        | The start date when using a date range picker      |
-| `endDate`           | `Date`                                     |         | ❌        | The end date when using a date range picker        |
-| `inputMode`         | `AndroidDateInputMode`                     |         | ❌        | The input mode to launch the date picker in        |
-| `type`              | `AndroidDatePickerType`                    |         | ❌        | The type of date picker to launch                  |
-| `onDateRangeChange` | `(startDate: Date, endDate: Date) => void` |         | ❌        | The callback invoked when a date range is selected |
+| Name                | Type                                       | Default | Required | Description                                                                                                                                                             |
+| ------------------- | ------------------------------------------ | ------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `minimumDate`       | `Date`                                     |         | ❌        | The minimum date allowed to be selected                                                                                                                                 |
+| `maximumDate`       | `Date`                                     |         | ❌        | The maximum date allowed to be selected                                                                                                                                 |
+| `startDate`         | `Date`                                     |         | ❌        | The start date when using a date range picker                                                                                                                           |
+| `endDate`           | `Date`                                     |         | ❌        | The end date when using a date range picker                                                                                                                             |
+| `inputMode`         | `AndroidDateInputMode`                     |         | ❌        | The input mode to launch the date picker in                                                                                                                             |
+| `fullscreen`        | `boolean`                                  |         | ❌        | Whether to show the date picker in fullscreen mode                                                                                                                      |
+| `type`              | `AndroidDatePickerType`                    |         | ❌        | The type of date picker to launch. Can be either `AndroidDatePickerType.DEFAULT` for the regular date picker or `AndroidDatePickerType.RANGE` for the date range picker |
+| `onDateRangeChange` | `(startDate: Date, endDate: Date) => void` |         | ❌        | The callback invoked when a date range is selected                                                                                                                      |
 
 #### Time Picker Options
 

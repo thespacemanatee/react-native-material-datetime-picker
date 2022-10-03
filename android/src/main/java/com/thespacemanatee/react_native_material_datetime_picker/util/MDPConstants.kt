@@ -14,6 +14,7 @@ object MDPConstants {
   const val KEY_POS_BUTTON_TEXT = "positiveButtonText"
   const val KEY_NEG_BUTTON_TEXT = "negativeButtonText"
   const val KEY_INPUT_MODE = "inputMode"
+  const val KEY_FULLSCREEN = "fullscreen"
   const val KEY_TYPE = "type"
 
   // actions

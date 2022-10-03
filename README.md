@@ -60,7 +60,7 @@ This library is a React Native date & time picker component for Android, using G
 ### Prerequisites
 
 - Material Design Components for Android
-  1. Make sure that the repositories section includes Google's Maven Repository `google()`
+  1. Make sure that the repositories section in your `android/build.gradle` includes Google's Maven Repository `google()`
     ```gradle
     allprojects {
       repositories {
@@ -73,7 +73,7 @@ This library is a React Native date & time picker component for Android, using G
     ```gradle
     dependencies {
       // ...
-      implementation 'com.google.android.material:material:<version>'
+      implementation 'com.google.android.material:material:1.6.1'
       // ...
     }
     ```
@@ -93,6 +93,8 @@ This library is a React Native date & time picker component for Android, using G
 ```sh
 yarn add react-native-material-datetime-picker
 ```
+
+Rebuild the project. Since iOS is not currently supported, running `npx pod-install` is optional.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

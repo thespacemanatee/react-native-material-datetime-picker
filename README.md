@@ -12,7 +12,7 @@
 <h3 align="center">React Native Material Datetime Picker</h3>
 
   <p align="center">
-    React Native date & time picker component for Android, using Google's latest Material Design components
+    A React Native date & time picker for Android, using Google's latest Material Design components. Built with Typescript ❤️
     <br />
     <a href="https://github.com/thespacemanatee/react-native-material-datetime-picker"><strong>Explore the docs »</strong></a>
     <br />
@@ -46,7 +46,7 @@
 </details>
 
 <!-- ABOUT THE PROJECT -->
-## About The Project
+## 📙 About The Project
 
 [![Product Screen Shot][product-screenshot]](https://example.com)
 
@@ -55,7 +55,7 @@ This library is a React Native date & time picker component for Android, using G
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- GETTING STARTED -->
-## Getting Started
+## ⚙️ Getting Started
 
 ### Prerequisites
 
@@ -98,12 +98,12 @@ Rebuild the project. Since iOS is not currently supported, running `npx pod-inst
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Expo Support
+## ![logo-type-a](https://user-images.githubusercontent.com/6837599/193513342-f51f6b53-b4d8-406b-916d-99756e59ee8c.svg) Expo Support
 
 This library should work with the EAS development client library, but it has not been tested. For managed projects, a config plugin is probably needed. If you would like to contribute a config plugin, please open an issue.
 
 <!-- USAGE EXAMPLES -->
-## Usage (Android)
+## ⚒️ Usage (Android)
 
 ### Imperative API
 
@@ -220,7 +220,7 @@ export const App = () => {
 
 
 <!-- ROADMAP -->
-## Roadmap
+## 🛣️ Roadmap
 
 - [ ] Polyfill for iOS and Web
 - [ ] Theme support
@@ -232,7 +232,7 @@ See the [open issues](https://github.com/thespacemanatee/react-native-material-d
 
 
 <!-- CONTRIBUTING -->
-## Contributing
+## 🙋 Contributing
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
@@ -248,14 +248,14 @@ Don't forget to give the project a star! Thanks again!
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- LICENSE -->
-## License
+## 📄 License
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
+## 🙇 Acknowledgments
 
 * [@react-native-datetimepicker/datetimepicker](https://github.com/react-native-datetimepicker/datetimepicker) - inspiration for the declarative API
 
@@ -275,4 +275,4 @@ Distributed under the MIT License. See `LICENSE` for more information.
 [license-url]: https://github.com/thespacemanatee/react-native-material-datetime-picker/blob/master/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/chee-kit
-[product-screenshot]: images/product-screenshot.png
+[product-screenshot]: https://user-images.githubusercontent.com/6837599/193515051-50d3a60f-94e2-4219-b171-c5e62d143c1c.png

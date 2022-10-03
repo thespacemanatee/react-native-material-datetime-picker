@@ -74,7 +74,7 @@ Rebuild the project. Since iOS is not currently supported, running `npx pod-inst
 
 ## ![logo-type-a](https://user-images.githubusercontent.com/6837599/193513342-f51f6b53-b4d8-406b-916d-99756e59ee8c.svg) Expo Support
 
-This library should work with the EAS development client library, but it has not been tested. For managed projects, a config plugin is probably needed. If you would like to contribute a config plugin, please open an issue.
+This library should work with the EAS development client library, but it has not been tested. For managed projects, a config plugin might be needed. If you would like to contribute a config plugin, please open an issue.
 
 <!-- USAGE EXAMPLES -->
 ## ⚒️ Usage (Android)

@@ -60,33 +60,7 @@ This library is a React Native date & time picker component for Android, using G
 ### Prerequisites
 
 - Material Design Components for Android
-  1. Make sure that the repositories section in your `android/build.gradle` includes Google's Maven Repository `google()`
-    ```gradle
-    allprojects {
-      repositories {
-        google()
-        mavenCentral()
-      }
-    }
-    ```
-  2. Add the following to your `android/app/build.gradle` file:
-    ```gradle
-    dependencies {
-      // ...
-      implementation 'com.google.android.material:material:1.6.1'
-      // ...
-    }
-    ```
-  3. Update your theme in `styles.xml` to inherit from `Theme.Material3.DayNight.NoActionBar`:
-    ```xml
-    <resources>
-      <!-- Base application theme. -->
-      <style name="AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your theme here. -->
-      </style>
-    </resources>
-    ```
-
+  - Starting from version `0.2.0`, you no longer have to install the Material Design Components library and update your app theme. Please make sure to remove it from your project if you have it installed.
 
 ### Installation
 

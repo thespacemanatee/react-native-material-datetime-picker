@@ -91,7 +91,7 @@ export const App = () => {
   const showTimePicker = () => {
     MaterialDatetimePickerAndroid.show({
       value: time,
-      title: 'Select flight time',
+      titleText: 'Select flight time',
       mode: AndroidPickerMode.TIME,
       is24Hours: true,
       inputMode: AndroidTimeInputMode.CLOCK,
@@ -104,10 +104,10 @@ export const App = () => {
   const showTimePicker = () => {
     MaterialDatetimePickerAndroid.show({
       value: date,
-      title: 'Select booking date',
+      titleText: 'Select booking date',
       mode: AndroidPickerMode.DATE,
-      minDate: subWeeks(today, 3),
-      maxDate: addWeeks(today, 4),
+      minimumDate: subWeeks(today, 3),
+      maximumDate: addWeeks(today, 4),
       inputMode: AndroidDateInputMode.CALENDAR,
       type: AndroidDatePickerType.DEFAULT,
       onChange: (date) => {
@@ -143,8 +143,8 @@ export const App = () => {
         <RNMaterialDatetimePicker
           mode={AndroidPickerMode.DATE}
           value={currentDate}
-          minDate={subWeeks(today, 3)}
-          maxDate={addWeeks(today, 4)}
+          minimumDate={subWeeks(today, 3)}
+          maximumDate={addWeeks(today, 4)}
           onChange={(date) => {
             setCurrentDate(date);
             setIsVisible(false);
@@ -160,20 +160,22 @@ export const App = () => {
 
 #### Common Options
 
-| Name       | Type                       | Default                  | Required | Description                                                            |
-| ---------- | -------------------------- | ------------------------ | -------- | ---------------------------------------------------------------------- |
-| `mode`     | `AndroidPickerMode`        | `AndroidPickerMode.DATE` | ❌        | The mode of picker to show                                             |
-| `value`    | `Date`                     |                          | ✅        | The current value of the picker                                        |
-| `title`    | `string`                   |                          | ❌        | The title to be shown on the top left                                  |
-| `onChange` | `(date: Date) => string`   |                          | ❌        | The callback invoked when a new date or time is selected               |
-| `onError`  | `(error: unknown) => void` |                          | ❌        | The callback invoked when an error occured while selecting a new value |
+| Name                 | Type                       | Default                  | Required | Description                                                            |
+| -------------------- | -------------------------- | ------------------------ | -------- | ---------------------------------------------------------------------- |
+| `mode`               | `AndroidPickerMode`        | `AndroidPickerMode.DATE` | ❌        | The mode of picker to show                                             |
+| `value`              | `Date`                     |                          | ✅        | The current value of the picker                                        |
+| `titleText`          | `string`                   |                          | ❌        | The title to be shown on the top left                                  |
+| `positiveButtonText` | `string`                   |                          | ❌        | The text used in the positive action button                            |
+| `negativeButtonText` | `string`                   |                          | ❌        | The text used in the negative action button                            |
+| `onChange`           | `(date: Date) => string`   |                          | ❌        | The callback invoked when a new date or time is selected               |
+| `onError`            | `(error: unknown) => void` |                          | ❌        | The callback invoked when an error occured while selecting a new value |
 
 #### Date Picker Options
 
 | Name                | Type                                       | Default | Required | Description                                        |
 | ------------------- | ------------------------------------------ | ------- | -------- | -------------------------------------------------- |
-| `minDate`           | `Date`                                     |         | ❌        | The minimum date allowed to be selected            |
-| `maxDate`           | `Date`                                     |         | ❌        | The maximum date allowed to be selected            |
+| `minimumDate`       | `Date`                                     |         | ❌        | The minimum date allowed to be selected            |
+| `maximumDate`       | `Date`                                     |         | ❌        | The maximum date allowed to be selected            |
 | `startDate`         | `Date`                                     |         | ❌        | The start date when using a date range picker      |
 | `endDate`           | `Date`                                     |         | ❌        | The end date when using a date range picker        |
 | `inputMode`         | `AndroidDateInputMode`                     |         | ❌        | The input mode to launch the date picker in        |

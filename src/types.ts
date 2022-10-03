@@ -32,34 +32,36 @@ export enum ActionType {
 type BaseProps = Readonly<
   ViewProps & {
     value: Date;
-    title?: string;
-    onChange?: (date: Date) => void;
+    titleText?: string;
+    positiveButtonText?: string;
+    negativeButtonText?: string;
+    onConfirm?: (date: Date) => void;
     onError?: (error: unknown) => void;
   }
 >;
 
 export interface DatePickerOptions extends BaseProps {
   mode?: AndroidPickerMode.DATE;
-  minDate?: Date;
-  maxDate?: Date;
+  minimumDate?: Date;
+  maximumDate?: Date;
   startDate?: Date;
   endDate?: Date;
   is24Hours?: never;
   inputMode?: AndroidDateInputMode;
   type?: AndroidDatePickerType;
-  onDateRangeChange?: (startDate: Date, endDate: Date) => void;
+  onConfirmDateRange?: (startDate: Date, endDate: Date) => void;
 }
 
 export interface TimePickerOptions extends BaseProps {
   mode?: AndroidPickerMode.TIME;
-  minDate?: never;
-  maxDate?: never;
+  minimumDate?: never;
+  maximumDate?: never;
   startDate?: never;
   endDate?: never;
   is24Hour?: boolean;
   inputMode?: AndroidTimeInputMode;
   type?: never;
-  onDateRangeChange?: never;
+  onConfirmDateRange?: never;
 }
 
 export type AndroidPickerProps = DatePickerOptions | TimePickerOptions;

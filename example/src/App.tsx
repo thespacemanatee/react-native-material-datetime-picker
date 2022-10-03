@@ -24,11 +24,13 @@ const App: FunctionComponent = () => {
   const handleShowTimePicker = () => {
     MaterialDatetimePickerAndroid.show({
       value: currentTime,
-      title: 'Select flight time',
+      titleText: 'Select flight time',
       mode: AndroidPickerMode.TIME,
       is24Hour: true,
+      positiveButtonText: 'Sounds good!',
+      negativeButtonText: 'Maybe not',
       inputMode: AndroidTimeInputMode.CLOCK,
-      onChange: (date) => {
+      onConfirm: (date) => {
         setCurrentTime(date);
       },
     });
@@ -37,13 +39,15 @@ const App: FunctionComponent = () => {
   const handleShowDatePicker = () => {
     MaterialDatetimePickerAndroid.show({
       value: currentDate,
-      title: 'Select booking date',
+      titleText: 'Select booking date',
       mode: AndroidPickerMode.DATE,
-      minDate: subWeeks(today, 3),
-      maxDate: addWeeks(today, 4),
+      minimumDate: subWeeks(today, 3),
+      maximumDate: addWeeks(today, 4),
+      positiveButtonText: 'Sounds good!',
+      negativeButtonText: 'Maybe not',
       inputMode: AndroidDateInputMode.CALENDAR,
       type: AndroidDatePickerType.DEFAULT,
-      onChange: (date) => {
+      onConfirm: (date) => {
         setCurrentDate(date);
       },
     });
@@ -52,15 +56,17 @@ const App: FunctionComponent = () => {
   const handleShowDateRangePicker = () => {
     MaterialDatetimePickerAndroid.show({
       value: currentDate,
-      title: 'Select duration of trip',
+      titleText: 'Select duration of trip',
       mode: AndroidPickerMode.DATE,
-      minDate: subDays(currentDate, 1),
-      maxDate: addWeeks(today, 4),
+      minimumDate: subDays(currentDate, 1),
+      maximumDate: addWeeks(today, 4),
       startDate: currentStartDate,
       endDate: currentEndDate,
+      positiveButtonText: 'Sounds good!',
+      negativeButtonText: 'Maybe not',
       inputMode: AndroidDateInputMode.CALENDAR,
       type: AndroidDatePickerType.RANGE,
-      onDateRangeChange: (startDate, endDate) => {
+      onConfirmDateRange: (startDate, endDate) => {
         setCurrentStartDate(startDate);
         setCurrentEndDate(endDate);
       },
@@ -73,9 +79,11 @@ const App: FunctionComponent = () => {
         <RNMaterialDatetimePicker
           mode={AndroidPickerMode.DATE}
           value={currentDate}
-          minDate={subWeeks(today, 3)}
-          maxDate={addWeeks(today, 4)}
-          onChange={(date) => {
+          minimumDate={subWeeks(today, 3)}
+          maximumDate={addWeeks(today, 4)}
+          positiveButtonText="Sounds good!"
+          negativeButtonText="Maybe not"
+          onConfirm={(date) => {
             setCurrentDate(date);
             setIsVisible(false);
           }}

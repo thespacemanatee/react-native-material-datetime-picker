@@ -8,7 +8,7 @@ const RNMaterialDatetimePicker = (props: AndroidPickerProps) => {
 
   useEffect(() => {
     return () => {
-      MaterialDatetimePickerAndroid.dismiss(mode);
+      MaterialDatetimePickerAndroid.dismiss();
     };
   }, [mode]);
 

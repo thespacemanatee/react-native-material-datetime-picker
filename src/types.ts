@@ -31,34 +31,85 @@ export enum ActionType {
 
 type BaseProps = Readonly<
   ViewProps & {
+    /**
+     * The current value of the picker
+     */
     value: Date;
+    /**
+     * The title to be shown on the top left
+     */
     titleText?: string;
+    /**
+     * The text used in the positive action button
+     */
     positiveButtonText?: string;
+    /**
+     * The text used in the negative action button
+     */
     negativeButtonText?: string;
+    /**
+     * The callback invoked when a new date or time is selected
+     */
     onConfirm?: (date: Date) => void;
+    /**
+     * The callback invoked when an error occured while selecting a new value
+     */
     onError?: (error: unknown) => void;
   }
 >;
 
 export interface DatePickerOptions extends BaseProps {
+  /**
+   * The mode of picker to show
+   */
   mode?: AndroidPickerMode.DATE;
+  /**
+   * The minimum date allowed to be selected
+   */
   minimumDate?: Date;
+  /**
+   * The maximum date allowed to be selected
+   */
   maximumDate?: Date;
+  /**
+   * The start date when using a date range picker
+   */
   startDate?: Date;
+  /**
+   * The end date when using a date range picker
+   */
   endDate?: Date;
   is24Hours?: never;
+  /**
+   * The input mode to launch the date picker in
+   */
   inputMode?: AndroidDateInputMode;
+  /**
+   * The type of date picker to launch
+   */
   type?: AndroidDatePickerType;
+  /**
+   * The callback invoked when a date range is selected
+   */
   onConfirmDateRange?: (startDate: Date, endDate: Date) => void;
 }
 
 export interface TimePickerOptions extends BaseProps {
+  /**
+   * The mode of picker to show
+   */
   mode?: AndroidPickerMode.TIME;
   minimumDate?: never;
   maximumDate?: never;
   startDate?: never;
   endDate?: never;
+  /**
+   * The time format to launch the time picker in
+   */
   is24Hour?: boolean;
+  /**
+   * The input mode to launch the time picker in
+   */
   inputMode?: AndroidTimeInputMode;
   type?: never;
   onConfirmDateRange?: never;

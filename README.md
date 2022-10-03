@@ -101,7 +101,7 @@ export const App = () => {
     });
   };
 
-  const showTimePicker = () => {
+  const showDatePicker = () => {
     MaterialDatetimePickerAndroid.show({
       value: date,
       titleText: 'Select booking date',
@@ -119,8 +119,8 @@ export const App = () => {
 
   return (
     <View>
-      <Button onPress={showDatepicker} title="Show date picker" />
-      <Button onPress={showTimepicker} title="Show time picker" />
+      <Button onPress={showDatePicker} title="Show date picker" />
+      <Button onPress={showTimePicker} title="Show time picker" />
       <Text>Date: {date.toLocaleString()}</Text>
       <Text>Time: {time.toLocaleString()}</Text>
     </View>

@@ -87,7 +87,7 @@ const App: FunctionComponent = () => {
           positiveButtonText="Sounds good!"
           negativeButtonText="Nah"
           onConfirm={(date) => {
-            setCurrentDate(date);
+            setCurrentTime(date);
             setIsVisible(false);
           }}
         />

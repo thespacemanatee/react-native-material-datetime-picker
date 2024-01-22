@@ -35,13 +35,13 @@
     "ios",
     "android"
   ],
-  "repository": "https://github.com/thespacemanatee/react-native-material-datetime-picker",
-  "author": "Chee Kit <cheekit.chong98@gmail.com> (https://github.com/thespacemanatee)",
+  "repository": "https://github.com/vpodolyan/react-native-material-datetime-picker",
+  "author": "Vladimir Podolyan <vpodolyan@outlook.com> (https://github.com/vpodolyan), Chee Kit <cheekit.chong98@gmail.com> (https://github.com/thespacemanatee)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/thespacemanatee/react-native-material-datetime-picker/issues"
+    "url": "https://github.com/vpodolyan/react-native-material-datetime-picker/issues"
   },
-  "homepage": "https://github.com/thespacemanatee/react-native-material-datetime-picker#readme",
+  "homepage": "https://github.com/vpodolyan/react-native-material-datetime-picker#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },

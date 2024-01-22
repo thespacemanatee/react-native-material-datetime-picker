@@ -2,12 +2,11 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "react-native-material-datetime-picker": ["./src/index"]
+      "react-native-material-datetime-picker-ext": ["./src/index"]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
     "esModuleInterop": true,
-    "importsNotUsedAsValues": "error",
     "forceConsistentCasingInFileNames": true,
     "jsx": "react",
     "lib": ["esnext"],

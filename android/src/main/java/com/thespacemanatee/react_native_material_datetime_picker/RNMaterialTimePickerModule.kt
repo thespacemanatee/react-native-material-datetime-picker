@@ -80,7 +80,6 @@ class RNMaterialTimePickerModule(reactContext: ReactApplicationContext) :
       promise.reject(ERROR_NO_ACTIVITY, "Current activity not found")
       return
     }
-    activity.setTheme(R.style.Theme_Material3_DayNight_NoActionBar)
     val fragmentManager = activity.supportFragmentManager
     val args = options?.createDialogArguments()
     UiThreadUtil.runOnUiThread {

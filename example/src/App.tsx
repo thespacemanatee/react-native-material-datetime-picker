@@ -9,7 +9,7 @@ import RNMaterialDatetimePicker, {
   AndroidTimeInputMode,
   MaterialDatetimePickerAndroid,
   AndroidDatePickerType,
-} from 'react-native-material-datetime-picker';
+} from 'react-native-material-datetime-picker-ext';
 
 const today = new Date();
 const start = subWeeks(today, 1);

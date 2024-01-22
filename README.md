@@ -70,7 +70,7 @@ This library is a React Native date & time picker component for Android, using G
 ### Installation
 
 ```sh
-yarn add react-native-material-datetime-picker
+yarn add react-native-material-datetime-picker-ext
 ```
 
 Rebuild the project. Since iOS is not currently supported, running `npx pod-install` is optional.

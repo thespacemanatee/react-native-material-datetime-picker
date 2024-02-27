@@ -10,6 +10,5 @@ export default class TimePicker {
 
   static async dismiss(): Promise<boolean> {
     throw new Error(`DatePicker is not supported on: ${Platform.OS}`);
-    console.log("hi xue feng");
   }
 }

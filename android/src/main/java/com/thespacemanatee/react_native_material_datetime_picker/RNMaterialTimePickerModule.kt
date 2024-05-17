@@ -17,6 +17,7 @@ import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.MaterialTimePicker.INPUT_MODE_CLOCK
 import com.google.android.material.timepicker.MaterialTimePicker.INPUT_MODE_KEYBOARD
 import com.google.android.material.timepicker.TimeFormat
+import com.google.android.material.R
 import com.thespacemanatee.react_native_material_datetime_picker.model.MDPArguments
 import com.thespacemanatee.react_native_material_datetime_picker.model.MDPDate
 import com.thespacemanatee.react_native_material_datetime_picker.util.MDPConstants.ACTION_DISMISSED
